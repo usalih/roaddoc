@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoadDoctor — Civil & Road Engineering Experts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --asphalt: #1a1a1a;
+    --asphalt-mid: #2a2a2a;
+    --asphalt-light: #3a3a3a;
+    --yellow-line: #f5c518;
+    --orange: #e85d04;
+    --orange-light: #ff6b1a;
+    --green: #2d9e5f;
+    --green-light: #3dbf74;
+    --sky: #0077b6;
+    --sky-light: #0096d4;
+    --white: #f5f3ee;
+    --offwhite: #ede9df;
+    --text-muted: #a8a29e;
+    --red: #c0392b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--asphalt);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    background: rgba(20,20,20,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--yellow-line);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--yellow-line);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--asphalt);
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+  .logo-text span { color: var(--yellow-line); }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow-line); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: white;
+    text-decoration: none;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange-light); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,20,20,0.7) 0%, rgba(20,20,20,0.85) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 48%,
+        rgba(245,197,24,0.12) 48%,
+        rgba(245,197,24,0.12) 52%,
+        transparent 52%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+    background-color: #111;
+  }
+
+  .road-stripe {
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 100%;
+    background: repeating-linear-gradient(
+      180deg,
+      var(--yellow-line) 0, var(--yellow-line) 60px,
+      transparent 60px, transparent 100px
+    );
+    animation: roadMove 2s linear infinite;
+    opacity: 0.5;
+  }
+  @keyframes roadMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 100px; }
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--yellow-line);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 2px;
+    background: var(--yellow-line);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .accent { color: var(--yellow-line); }
+  .hero-title .accent-o { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--offwhite);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    padding: 14px 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 2px solid var(--yellow-line);
+    color: var(--yellow-line);
+    padding: 12px 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--yellow-line); color: var(--asphalt); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,197,24,0.2);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--yellow-line);
+  }
+  .stat-card.orange::before { background: var(--orange); }
+  .stat-card.green::before { background: var(--green); }
+  .stat-card.sky::before { background: var(--sky); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .tag-yellow { color: var(--yellow-line); }
+  .tag-orange { color: var(--orange); }
+  .tag-green { color: var(--green-light); }
+  .tag-sky { color: var(--sky-light); }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 60px; height: 3px;
+    background: var(--yellow-line);
+    margin-bottom: 2rem;
+  }
+  .divider.orange { background: var(--orange); }
+  .divider.green { background: var(--green-light); }
+  .divider.sky { background: var(--sky-light); }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--yellow-line);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: tickerScroll 30s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--asphalt);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 3rem;
+  }
+  .ticker-dot {
+    color: var(--orange);
+    margin: 0 0.5rem;
+  }
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ── */
+  .about-section { background: var(--asphalt-mid); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .road-cross-section {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .layer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    position: relative;
+  }
+  .layer-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-left: auto;
+    font-weight: 400;
+  }
+  .l1 { background: #1a1a1a; border-left: 4px solid #888; color: #aaa; }
+  .l2 { background: #2d2d2d; border-left: 4px solid #666; color: #bbb; }
+  .l3 { background: #3d3d1a; border-left: 4px solid var(--yellow-line); color: var(--yellow-line); }
+  .l4 { background: #1a2d1a; border-left: 4px solid var(--green); color: var(--green-light); }
+  .l5 { background: #1a1a3d; border-left: 4px solid var(--sky); color: var(--sky-light); }
+  .l6 { background: #3d1a1a; border-left: 4px solid var(--red); color: #e07070; }
+
+  .about-text h2 { margin-bottom: 1rem; }
+  .about-text p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--offwhite);
+    margin-bottom: 1.2rem;
+  }
+  .checkmarks { list-style: none; margin-top: 1.5rem; }
+  .checkmarks li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--offwhite);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .check { color: var(--green-light); font-size: 18px; }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #333;
+    margin-top: 3rem;
+  }
+  .service-card {
+    background: var(--asphalt);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--asphalt-light); }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--yellow-line);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover::after { width: 100%; }
+
+  .service-icon {
+    width: 56px; height: 56px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 28px;
+  }
+  .icon-yellow { background: rgba(245,197,24,0.12); color: var(--yellow-line); }
+  .icon-orange { background: rgba(232,93,4,0.12); color: var(--orange-light); }
+  .icon-green  { background: rgba(45,158,95,0.12); color: var(--green-light); }
+  .icon-sky    { background: rgba(0,119,182,0.12); color: var(--sky-light); }
+  .icon-red    { background: rgba(192,57,43,0.12); color: #e07070; }
+  .icon-white  { background: rgba(255,255,255,0.06); color: var(--white); }
+
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .service-card p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .service-num {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--asphalt-mid); overflow: hidden; }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: 10%; right: 10%;
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--yellow-line) 0, var(--yellow-line) 20px,
+      transparent 20px, transparent 30px
+    );
+  }
+  .process-step {
+    padding: 0 1rem;
+    text-align: center;
+  }
+  .step-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .sc1 { background: var(--yellow-line); color: var(--asphalt); }
+  .sc2 { background: var(--orange); color: white; }
+  .sc3 { background: var(--green); color: white; }
+  .sc4 { background: var(--sky); color: white; }
+  .sc5 { background: var(--red); color: white; }
+
+  .process-step h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .process-step p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── WHY US ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .why-items { display: flex; flex-direction: column; gap: 1.5rem; }
+  .why-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .why-item:hover {
+    border-color: rgba(245,197,24,0.3);
+    background: rgba(245,197,24,0.04);
+  }
+  .why-icon-wrap {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    background: rgba(245,197,24,0.1);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    color: var(--yellow-line);
+  }
+  .why-text h4 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 0.4rem;
+  }
+  .why-text p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  .big-quote {
+    background: rgba(245,197,24,0.05);
+    border-left: 6px solid var(--yellow-line);
+    padding: 3rem;
+    font-family: 'Barlow', sans-serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--offwhite);
+  }
+  .big-quote cite {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--yellow-line);
+    letter-spacing: 1px;
+  }
+
+  /* ── SPECIALIZATIONS ── */
+  .spec-section { background: #111; }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .spec-card {
+    background: var(--asphalt);
+    border-top: 4px solid;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.25s;
+  }
+  .spec-card:hover { transform: translateY(-6px); }
+  .spec-card:nth-child(1) { border-color: var(--yellow-line); }
+  .spec-card:nth-child(2) { border-color: var(--orange); }
+  .spec-card:nth-child(3) { border-color: var(--green-light); }
+  .spec-card:nth-child(4) { border-color: var(--sky-light); }
+  .spec-card:nth-child(5) { border-color: #e07070; }
+  .spec-card:nth-child(6) { border-color: #c084fc; }
+  .spec-card:nth-child(7) { border-color: var(--green-light); }
+  .spec-card:nth-child(8) { border-color: var(--orange); }
+
+  .spec-emoji { font-size: 36px; margin-bottom: 1rem; display: block; }
+  .spec-card h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .spec-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── STANDARDS ── */
+  .standards-section { background: var(--asphalt-mid); }
+  .standards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .std-card {
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .std-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .badge-yellow { background: var(--yellow-line); color: var(--asphalt); }
+  .badge-orange { background: var(--orange); color: white; }
+  .badge-green  { background: var(--green); color: white; }
+  .badge-sky    { background: var(--sky); color: white; }
+  .badge-red    { background: var(--red); color: white; }
+  .badge-white  { background: rgba(255,255,255,0.15); color: var(--white); }
+
+  .std-card h4 {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 0.5rem;
+  }
+  .std-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── MATERIALS TABLE ── */
+  .materials-section { background: #111; }
+  .mat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    font-size: 14px;
+  }
+  .mat-table th {
+    background: var(--yellow-line);
+    color: var(--asphalt);
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .mat-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--offwhite);
+    vertical-align: top;
+  }
+  .mat-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .mat-table tr:hover td { background: rgba(245,197,24,0.05); }
+  .mat-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+  .mat-hq  { background: rgba(61,191,116,0.15); color: var(--green-light); }
+  .mat-std { background: rgba(245,197,24,0.15); color: var(--yellow-line); }
+  .mat-sp  { background: rgba(0,150,212,0.15);  color: var(--sky-light); }
+
+  /* ── EQUIPMENT ── */
+  .equip-section { background: var(--asphalt-mid); }
+  .equip-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .equip-item {
+    background: #111;
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .equip-item:hover { border-color: var(--orange); }
+  .equip-item span { font-size: 32px; display: block; margin-bottom: 0.75rem; }
+  .equip-item p {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--offwhite);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--asphalt);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: 'CONTACT';
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(255,255,255,0.015);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-info h2 { margin-bottom: 1rem; }
+  .contact-info p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .contact-details { list-style: none; }
+  .contact-details li {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .c-icon {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .ci-y { background: rgba(245,197,24,0.12); color: var(--yellow-line); }
+  .ci-o { background: rgba(232,93,4,0.12); color: var(--orange-light); }
+  .ci-g { background: rgba(45,158,95,0.12); color: var(--green-light); }
+
+  .c-detail strong {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .c-detail span { font-size: 15px; color: var(--white); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 12px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--yellow-line);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select option { background: #222; color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0d0d;
+    border-top: 3px solid var(--yellow-line);
+    padding: 3rem 0 1.5rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-about p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-top: 1rem;
+  }
+  .footer-col h5 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--yellow-line);
+    margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    margin-bottom: 0.6rem;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p { font-size: 13px; color: var(--text-muted); }
+  .footer-bottom span { color: var(--yellow-line); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">RD</div>
+    <span class="logo-text">Road<span>Doctor</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#specializations">Expertise</a></li>
+    <li><a href="#materials">Materials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="road-stripe"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">Nigeria's Premier Road Engineering Firm</div>
+      <h1 class="hero-title">
+        WE BUILD<br>
+        <span class="accent">ROADS</span><br>
+        THAT <span class="accent-o">LAST</span>
+      </h1>
+      <p class="hero-sub">
+        RoadDoctor delivers world-class civil and road engineering solutions across Nigeria — from pavement design and rehabilitation to full infrastructure development. Built on precision. Driven by results.
+      </p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Our Services</a>
+        <a href="#contact" class="btn-outline">Free Consultation</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--yellow-line)">15+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-num" style="color:var(--orange-light)">200+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num" style="color:var(--green-light)">98%</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div class="stat-card sky">
+        <div class="stat-num" style="color:var(--sky-light)">19</div>
+        <div class="stat-label">States Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Pavement Design <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Road Rehabilitation <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traffic Engineering <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Drainage Systems <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Geotechnical Survey <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Bridge Engineering <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Road Marking <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Soil Testing <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Pavement Design <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Road Rehabilitation <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traffic Engineering <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Drainage Systems <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Geotechnical Survey <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Bridge Engineering <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Road Marking <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Soil Testing <span class="ticker-dot">◆</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-up">
+        <div class="road-cross-section">
+          <div style="font-size:11px; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem; font-weight:600;">Road Cross-Section Diagram</div>
+          <div class="layer l1">Wearing Course (AC Surfacing) <span class="layer-label">40–50mm</span></div>
+          <div class="layer l2">Binder Course <span class="layer-label">60–80mm</span></div>
+          <div class="layer l3">Asphaltic Base Course <span class="layer-label">80–120mm</span></div>
+          <div class="layer l4">Granular Sub-Base <span class="layer-label">150–300mm</span></div>
+          <div class="layer l5">Select Fill / Improved Subgrade <span class="layer-label">300mm</span></div>
+          <div class="layer l6">Natural Subgrade <span class="layer-label">Varies</span></div>
+        </div>
+        <div style="margin-top:1rem; padding:1rem; background:rgba(245,197,24,0.06); border-left:3px solid var(--yellow-line); font-size:13px; color:var(--text-muted); line-height:1.6;">
+          Every RoadDoctor project begins with a full pavement structural analysis — ensuring the right layer thickness for the right traffic loading.
+        </div>
+      </div>
+      <div class="about-text fade-up">
+        <div class="section-tag tag-yellow">Who We Are</div>
+        <h2 class="section-title">Engineering Excellence on Every Road</h2>
+        <div class="divider"></div>
+        <p>RoadDoctor is a leading civil and road engineering company headquartered in Abuja, Nigeria. We combine deep technical expertise with practical on-ground experience to deliver road infrastructure that withstands Nigeria's challenging climate and traffic conditions.</p>
+        <p>From federal highways to urban access roads, we apply international best practices — grounded in AASHTO, BS, and Nigerian Highway Manual standards — to every kilometre we build, rehabilitate, or maintain.</p>
+        <ul class="checkmarks">
+          <li><span class="check">✔</span> COREN-registered civil engineers on every project</li>
+          <li><span class="check">✔</span> Full design-to-delivery project management</li>
+          <li><span class="check">✔</span> Laboratory-certified material testing</li>
+          <li><span class="check">✔</span> Climate-resilient pavement engineering</li>
+          <li><span class="check">✔</span> Transparent reporting and milestone tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-tag tag-orange">What We Do</div>
+    <h2 class="section-title">Our Core Services</h2>
+    <div class="divider orange"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-num">01</span>
+      <div class="service-icon icon-yellow">🛣️</div>
+      <h3>Road Design & Construction</h3>
+      <p>Full geometric and structural design of highways, urban roads, rural access roads, and expressways. We handle everything from route surveys to final surface finishing, including signage and markings.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">02</span>
+      <div class="service-icon icon-orange">🔧</div>
+      <h3>Pavement Rehabilitation</h3>
+      <p>Comprehensive distress analysis and remediation — pothole patching, overlay, milling and resurfacing, cold-in-place recycling, and full-depth reclamation for failed pavements.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">03</span>
+      <div class="service-icon icon-green">💧</div>
+      <h3>Drainage Engineering</h3>
+      <p>Design and construction of stormwater drainage systems, culverts, side drains, French drains, and urban flood control infrastructure integrated with road design.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">04</span>
+      <div class="service-icon icon-sky">🏗️</div>
+      <h3>Bridge & Culvert Works</h3>
+      <p>Structural design, construction, inspection, and rehabilitation of bridges, box culverts, and crossing structures. We handle load-rating assessments and seismic evaluations.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">05</span>
+      <div class="service-icon icon-red">🔬</div>
+      <h3>Geotechnical Investigation</h3>
+      <p>Comprehensive soil exploration, bearing capacity testing, CBR tests, laboratory analysis, and geotechnical reporting to inform foundation and pavement design decisions.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">06</span>
+      <div class="service-icon icon-white">🚦</div>
+      <h3>Traffic Engineering</h3>
+      <p>Traffic impact assessments, intersection design, signalling, speed management, road safety audits, and ITS planning for sustainable urban mobility systems.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">07</span>
+      <div class="service-icon icon-yellow">📐</div>
+      <h3>Project Management & Supervision</h3>
+      <p>End-to-end project administration — quantity surveying, contract management, resident engineering, quality assurance, and independent site supervision for client protection.</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">08</span>
+      <div class="service-icon icon-orange">🗺️</div>
+      <h3>Topographic & Route Surveys</h3>
+      <p>Total station, GNSS, drone photogrammetry, and LiDAR surveys for accurate route planning, earthwork calculations, and digital terrain modelling (DTM).</p>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">09</span>
+      <div class="service-icon icon-green">🌍</div>
+      <h3>Environmental Impact Assessment</h3>
+      <p>Preparation of EIA reports, noise and pollution studies, ecological surveys, and environmental mitigation planning in compliance with NESREA and FEPA standards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="section-tag tag-yellow">How We Work</div>
+    <h2 class="section-title">Our Engineering Process</h2>
+    <div class="divider"></div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="step-circle sc1">01</div>
+        <h4>Site Assessment</h4>
+        <p>Topographic survey, traffic count, soil investigation, and pavement condition rating</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle sc2">02</div>
+        <h4>Design & Analysis</h4>
+        <p>Structural pavement design, hydraulic modelling, geometric layout using AutoCAD Civil 3D</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle sc3">03</div>
+        <h4>Costing & BOQ</h4>
+        <p>Detailed bill of quantities, value engineering, procurement scheduling, and budget optimisation</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle sc4">04</div>
+        <h4>Construction</h4>
+        <p>Mobilisation, earthworks, layer-by-layer construction with QC checks at every stage</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="step-circle sc5">05</div>
+        <h4>Handover & QA</h4>
+        <p>Final inspections, as-built drawings, snag clearance, and road maintenance manual delivery</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="section-tag tag-orange">Why RoadDoctor</div>
+    <h2 class="section-title">The RoadDoctor Advantage</h2>
+    <div class="divider orange"></div>
+    <div class="why-grid">
+      <div class="why-items">
+        <div class="why-item fade-up">
+          <div class="why-icon-wrap">🎯</div>
+          <div class="why-text">
+            <h4>Evidence-Based Design</h4>
+            <p>Every pavement structure is backed by soil data, traffic projections, and climate-adjusted ESAL calculations — no guessing.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon-wrap">⚡</div>
+          <div class="why-text">
+            <h4>Fast Project Turnaround</h4>
+            <p>Streamlined project delivery systems, pre-qualified supplier networks, and agile construction teams reduce delays dramatically.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon-wrap">🛡️</div>
+          <div class="why-text">
+            <h4>Nigerian-Context Expertise</h4>
+            <p>We understand local soil types, rainfall patterns, axle loading realities, and regulatory frameworks better than anyone.</p>
+          </div>
+        </div>
+        <div class="why-item fade-up">
+          <div class="why-icon-wrap">📊</div>
+          <div class="why-text">
+            <h4>Full Transparency</h4>
+            <p>Real-time reporting dashboards, weekly site photos, and open-book accounting on all projects above ₦50M.</p>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="big-quote">
+          "A road is only as good as its weakest layer. At RoadDoctor, we don't just build roads — we engineer longevity from the subgrade up."
+          <cite>— RoadDoctor Engineering Team</cite>
+        </div>
+        <div style="margin-top:2rem; padding:1.5rem; background:rgba(232,93,4,0.08); border:1px solid rgba(232,93,4,0.2);">
+          <div style="font-size:12px; color:var(--orange-light); letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:0.75rem;">Our Commitment</div>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.7;">Every road we deliver carries a 2-year structural defects warranty. We stand behind our work with documented quality control records for each construction layer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIZATIONS -->
+<section class="spec-section" id="specializations">
+  <div class="container">
+    <div class="section-tag tag-green">Technical Expertise</div>
+    <h2 class="section-title">Our Specialisations</h2>
+    <div class="divider green"></div>
+    <div class="spec-grid">
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🛣️</span>
+        <h4>Flexible Pavement</h4>
+        <p>Asphalt design, mix design, Marshall test, modified binders, and PMB mixes for heavy-duty roads.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🏛️</span>
+        <h4>Rigid Pavement</h4>
+        <p>Portland cement concrete roads, jointed plain concrete, continuously reinforced, and whitetopping.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">♻️</span>
+        <h4>Recycled Pavement</h4>
+        <p>Cold recycling, FDR with cement/lime stabilisation, and reclaimed asphalt pavement (RAP) solutions.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🌧️</span>
+        <h4>Flood-Resilient Roads</h4>
+        <p>Climate-adapted design with pervious surfaces, bioswales, and hydrological modelling for floodplains.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🏘️</span>
+        <h4>Urban Road Networks</h4>
+        <p>City road master plans, estate roads, kerbing, footpaths, cycle lanes, and street landscaping.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🚛</span>
+        <h4>Industrial & Port Roads</h4>
+        <p>Heavy haul road design for 80-tonne+ axle loads — mines, ports, logistics parks, and refineries.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🌉</span>
+        <h4>Bridges & Overpasses</h4>
+        <p>RC and prestressed bridges, pedestrian walkways, flyovers, and grade-separated interchanges.</p>
+      </div>
+      <div class="spec-card fade-up">
+        <span class="spec-emoji">🔭</span>
+        <h4>Road Safety Engineering</h4>
+        <p>Hazard identification, safety audits, blackspot treatment, guardrails, crash barriers, and road furniture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards-section">
+  <div class="container">
+    <div class="section-tag tag-sky">Compliance & Standards</div>
+    <h2 class="section-title">Codes & Standards We Work By</h2>
+    <div class="divider sky"></div>
+    <div class="standards-grid">
+      <div class="std-card fade-up">
+        <span class="std-badge badge-yellow">Nigeria</span>
+        <h4>Federal Highway Manual</h4>
+        <p>Full compliance with the Nigerian Federal Highway Manual — design speeds, lane widths, sight distances, and superelevation standards for all road classifications.</p>
+      </div>
+      <div class="std-card fade-up">
+        <span class="std-badge badge-orange">AASHTO</span>
+        <h4>AASHTO Pavement Design</h4>
+        <p>AASHTO 1993 Mechanistic-Empirical Pavement Design Guide for structural pavement thickness calculations based on traffic loading (ESALs) and soil resilient modulus.</p>
+      </div>
+      <div class="std-card fade-up">
+        <span class="std-badge badge-sky">British</span>
+        <h4>BS & HD Standards</h4>
+        <p>Highways England Design Manuals (HD) and British Standards for drainage, geotechnical work, materials specification, and bridge structural design.</p>
+      </div>
+      <div class="std-card fade-up">
+        <span class="std-badge badge-green">Testing</span>
+        <h4>ASTM & NIS Testing</h4>
+        <p>All material testing — aggregate gradation, Proctor compaction, CBR, Marshall stability, concrete strength — carried out to ASTM and Nigerian Industrial Standards (NIS).</p>
+      </div>
+      <div class="std-card fade-up">
+        <span class="std-badge badge-red">Safety</span>
+        <h4>iRAP Road Safety Standards</h4>
+        <p>International Road Assessment Programme (iRAP) protocols applied in road safety audits to systematically identify and eliminate life-threatening infrastructure deficiencies.</p>
+      </div>
+      <div class="std-card fade-up">
+        <span class="std-badge badge-white">Environment</span>
+        <h4>NESREA Regulations</h4>
+        <p>Environmental compliance with National Environmental Standards and Regulations Enforcement Agency (NESREA) guidelines throughout all phases of project delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS TABLE -->
+<section class="materials-section" id="materials">
+  <div class="container">
+    <div class="section-tag tag-yellow">Technical Reference</div>
+    <h2 class="section-title">Road Construction Materials</h2>
+    <div class="divider"></div>
+    <table class="mat-table">
+      <thead>
+        <tr>
+          <th>Material</th>
+          <th>Application</th>
+          <th>Specification</th>
+          <th>Typical Thickness</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dense-Graded Asphalt Concrete (AC)</strong></td>
+          <td>Wearing course — high-traffic urban roads</td>
+          <td>ASTM D3515 / AASHTO M323</td>
+          <td>40–50mm</td>
+          <td><span class="mat-badge mat-hq">High Quality</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stone Mastic Asphalt (SMA)</strong></td>
+          <td>Wearing course — expressways and heavy haul</td>
+          <td>EN 13108-5</td>
+          <td>30–40mm</td>
+          <td><span class="mat-badge mat-hq">Premium</span></td>
+        </tr>
+        <tr>
+          <td><strong>Binder Course Asphalt</strong></td>
+          <td>Intermediate structural layer</td>
+          <td>ASTM D6926 Marshall Design</td>
+          <td>60–80mm</td>
+          <td><span class="mat-badge mat-std">Standard</span></td>
+        </tr>
+        <tr>
+          <td><strong>Asphaltic Base (DBM)</strong></td>
+          <td>Structural base for flexible pavement</td>
+          <td>BS 594987</td>
+          <td>80–150mm</td>
+          <td><span class="mat-badge mat-std">Standard</span></td>
+        </tr>
+        <tr>
+          <td><strong>Crushed Aggregate Sub-Base</strong></td>
+          <td>Load distribution below pavement layers</td>
+          <td>CBR ≥ 30%, LL ≤ 25%</td>
+          <td>150–300mm</td>
+          <td><span class="mat-badge mat-std">Granular</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lime-Stabilised Subgrade</strong></td>
+          <td>Weak soil improvement layer</td>
+          <td>ASTM D559 / IS 1498</td>
+          <td>150–300mm</td>
+          <td><span class="mat-badge mat-sp">Specialised</span></td>
+        </tr>
+        <tr>
+          <td><strong>Portland Cement Concrete (PCC)</strong></td>
+          <td>Rigid pavement slab — industrial roads</td>
+          <td>ACI 330R / ASTM C39</td>
+          <td>200–300mm</td>
+          <td><span class="mat-badge mat-hq">High Strength</span></td>
+        </tr>
+        <tr>
+          <td><strong>Geogrid Reinforcement</strong></td>
+          <td>Subgrade stabilisation, weak soils</td>
+          <td>ASTM D6637</td>
+          <td>Single layer</td>
+          <td><span class="mat-badge mat-sp">Specialised</span></td>
+        </tr>
+        <tr>
+          <td><strong>Emulsion Prime Coat</strong></td>
+          <td>Bond sub-base to base course</td>
+          <td>ASTM D2028 (CSS-1/SS-1)</td>
+          <td>0.5–1.0 L/m²</td>
+          <td><span class="mat-badge mat-std">Standard</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="equip-section">
+  <div class="container">
+    <div class="section-tag tag-orange">Our Fleet</div>
+    <h2 class="section-title">Equipment & Plant</h2>
+    <div class="divider orange"></div>
+    <div class="equip-grid">
+      <div class="equip-item fade-up"><span>🚜</span><p>Motor Graders</p></div>
+      <div class="equip-item fade-up"><span>🛢️</span><p>Asphalt Pavers</p></div>
+      <div class="equip-item fade-up"><span>🔨</span><p>Vibratory Compactors</p></div>
+      <div class="equip-item fade-up"><span>🚛</span><p>Articulated Dump Trucks</p></div>
+      <div class="equip-item fade-up"><span>⛏️</span><p>Milling Machines</p></div>
+      <div class="equip-item fade-up"><span>🔭</span><p>Total Stations & GNSS</p></div>
+      <div class="equip-item fade-up"><span>🧪</span><p>Mobile Testing Lab</p></div>
+      <div class="equip-item fade-up"><span>🚁</span><p>Survey Drones (UAV)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-up">
+        <div class="section-tag tag-yellow">Get in Touch</div>
+        <h2 class="section-title">Let's Build Something That Lasts</h2>
+        <div class="divider"></div>
+        <p>Whether you're managing a federal highway, developing an estate road, or rehabilitating a failed pavement — RoadDoctor has the expertise to deliver.</p>
+        <ul class="contact-details">
+          <li>
+            <div class="c-icon ci-y">📍</div>
+            <div class="c-detail">
+              <strong>Head Office</strong>
+              <span>Plot 22 Mamman Shafa Road, Lugbe, Abuja, FCT, Nigeria</span>
+            </div>
+          </li>
+          <li>
+            <div class="c-icon ci-o">📞</div>
+            <div class="c-detail">
+              <strong>Phone</strong>
+              <span>+234 902 264 4650</span>
+            </div>
+          </li>
+          <li>
+            <div class="c-icon ci-g">✉️</div>
+            <div class="c-detail">
+              <strong>Email</strong>
+              <span>roaddoctor74@gmail.com</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="fade-up">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:2.5rem;">
+          <div style="font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow-line); margin-bottom:1.5rem;">Request a Free Consultation</div>
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Engr. Ahmed Sule">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="+234 800 000 0000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="you@organization.gov.ng">
+            </div>
+            <div class="form-group">
+              <label>Project Type</label>
+              <select>
+                <option>Select project type...</option>
+                <option>New Road Construction</option>
+                <option>Pavement Rehabilitation</option>
+                <option>Bridge / Culvert Works</option>
+                <option>Drainage Engineering</option>
+                <option>Geotechnical Investigation</option>
+                <option>Traffic Engineering</option>
+                <option>Project Supervision</option>
+                <option>Topographic Survey</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Project Location & Description</label>
+              <textarea placeholder="Describe your road project — location, estimated length/area, current condition, and timeline..."></textarea>
+            </div>
+            <button class="btn-primary" style="clip-path:none; width:100%; text-align:center; padding:16px; font-size:15px;">
+              Send Enquiry →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#" class="nav-logo" style="text-decoration:none; display:inline-flex; gap:10px; align-items:center;">
+          <div class="logo-icon">RD</div>
+          <span class="logo-text">Road<span>Doctor</span></span>
+        </a>
+        <p>Nigeria's trusted civil and road engineering specialists. Delivering durable infrastructure from Abuja and across all 36 states.</p>
+        <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
+          <div style="width:36px;height:36px;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;">🔗</div>
+          <div style="width:36px;height:36px;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;">📘</div>
+          <div style="width:36px;height:36px;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;">🐦</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li>Road Design & Construction</li>
+          <li>Pavement Rehabilitation</li>
+          <li>Drainage Engineering</li>
+          <li>Bridge & Culvert Works</li>
+          <li>Geotechnical Investigation</li>
+          <li>Traffic Engineering</li>
+          <li>Project Supervision</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Expertise</h5>
+        <ul>
+          <li>Flexible Pavements</li>
+          <li>Rigid Pavements</li>
+          <li>Road Recycling</li>
+          <li>Urban Road Networks</li>
+          <li>Industrial Roads</li>
+          <li>Road Safety Audits</li>
+          <li>EIA Reports</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>Plot 22 Mamman Shafa Road</li>
+          <li>Lugbe, Abuja, FCT</li>
+          <li>+234 902 264 4650</li>
+          <li>roaddoctor74@gmail.com</li>
+          <li style="margin-top:1rem; color:var(--yellow-line); font-weight:600;">Mon–Fri: 8am – 5pm</li>
+          <li style="color:var(--yellow-line);">Sat: 9am – 1pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>RoadDoctor Nigeria</span>. All rights reserved. COREN Registered.</p>
+      <p>Powered by <span>Zapatch Technologies</span>.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
